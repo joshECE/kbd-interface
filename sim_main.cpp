@@ -65,48 +65,43 @@ int main(int argc, char** argv) {
     // Putting in my own stuff...
     //
 
-    int datain[] = {1,1,1,  0,1,0,1,0,1,0,0,0,  1,1,1,1,1,1,1,1};
+    int datain[] = {1,1,1,1,1,1,1,1,   0,   1,0,0,1,0,0,1,1,   1,    1,   1,1,   0,    0,0,0,1,1,1,1,0,    1,   1,   1,1};
+
+    int clkon[] =  {0,0,0,0,0,0,0,0,   1,   1,1,1,1,1,1,1,1,   1,    1,   0,0,   1,    1,1,1,1,1,1,1,1,    1,   1,   0,0};
+
 
     // Set Vtop's input signals
     top->clk = 1;
     top->data = 1;
-  
-    // Simulate until $finish
-    for (int i = 0; i < 2 * sizeof(datain)/sizeof(datain[0]); ++i) {
-        // Historical note, before Verilator 4.200 Verilated::gotFinish()
-        // was used above in place of contextp->gotFinish().
-        // Most of the contextp-> calls can use Verilated:: calls instead;
-        // the Verilated:: versions just assume there's a single context
-        // being used (per thread).  It's faster and clearer to use the
-        // newer contextp-> versions.
 
-        contextp->timeInc(1);  // 1 timeprecision period passes...
-        // Historical note, before Verilator 4.200 a sc_time_stamp()
-        // function was required instead of using timeInc.  Once timeInc()
-        // is called (with non-zero), the Verilated libraries assume the
-        // new API, and sc_time_stamp() will no longer work.
+    contextp->timeInc(1);  // 1 timeprecision period passes...
 
-        // Toggle a fast (time/2 period) clock
-        top->clk = !top->clk;
+    for (int i = 0; i < sizeof(datain)/sizeof(datain[0]); ++i) {
 
-        // Toggle control signals on an edge that doesn't correspond
-        // to where the controls are sampled; in this example we do
-        // this only on a negedge of clk, because we know
-        // reset is not sampled there.
-        if (top->clk) {
-		top -> data = datain[i/2];
+	top -> data = datain[i];
+	
+	contextp->timeInc(1);
+
+	top->eval();
+
+	VL_PRINTF("[%" PRId64 "] clk=%x data=%x state=%x" PRIx64 " -> word=%d\n",  contextp->time(), top->clk, top->data,top->s, top->word);
+
+	if (clkon[i] == 1) {
+		top->clk = !top->clk;
+		contextp->timeInc(1);
+		VL_PRINTF("[%" PRId64 "] clk=%x data=%x state=%x" PRIx64 " -> word=%d\n",  contextp->time(), top->clk, top->data,top->s, top->word);
+		top->eval();
+		top->clk = !top->clk;
+	} else {
+		contextp->timeInc(1);
+		VL_PRINTF("[%" PRId64 "] clk=%x data=%x state=%x" PRIx64 " -> word=%d\n",  contextp->time(), top->clk, top->data,top->s, top->word);
+		top->eval();
 	}
-		
 
-        // Evaluate model
-        // (If you have multiple models being simulated in the same
-        // timestep then instead of eval(), call eval_step() on each, then
-        // eval_end_step() on each. See the manual.)
-        top->eval();
+
+
 //	tfp->dump(contextp->time());
 
-        // Read outputs
-	VL_PRINTF("[%" PRId64 "] clk=%x data=%x state=%x" PRIx64 " -> word=%d\n",  contextp->time(), top->clk, top->data,top->s, top->word);
 
     }
 

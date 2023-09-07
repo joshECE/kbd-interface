@@ -7,10 +7,14 @@
 #include "Vtop__Syms.h"
 #include "Vtop___024root.h"
 
+VL_ATTR_COLD void Vtop___024root___eval_static__TOP(Vtop___024root* vlSelf);
+
 VL_ATTR_COLD void Vtop___024root___eval_static(Vtop___024root* vlSelf) {
     if (false && vlSelf) {}  // Prevent unused
     Vtop__Syms* const __restrict vlSymsp VL_ATTR_UNUSED = vlSelf->vlSymsp;
     VL_DEBUG_IF(VL_DBG_MSGF("+    Vtop___024root___eval_static\n"); );
+    // Body
+    Vtop___024root___eval_static__TOP(vlSelf);
 }
 
 VL_ATTR_COLD void Vtop___024root___eval_initial__TOP(Vtop___024root* vlSelf);
@@ -22,6 +26,7 @@ VL_ATTR_COLD void Vtop___024root___eval_initial(Vtop___024root* vlSelf) {
     // Body
     Vtop___024root___eval_initial__TOP(vlSelf);
     vlSelf->__Vtrigprevexpr___TOP__clk__0 = vlSelf->clk;
+    vlSelf->__Vtrigprevexpr___TOP__word__0 = vlSelf->word;
 }
 
 VL_ATTR_COLD void Vtop___024root___eval_final(Vtop___024root* vlSelf) {
@@ -117,6 +122,9 @@ VL_ATTR_COLD void Vtop___024root___dump_triggers__act(Vtop___024root* vlSelf) {
     if ((1ULL & vlSelf->__VactTriggered.word(0U))) {
         VL_DBG_MSGF("         'act' region trigger index 0 is active: @(negedge clk)\n");
     }
+    if ((2ULL & vlSelf->__VactTriggered.word(0U))) {
+        VL_DBG_MSGF("         'act' region trigger index 1 is active: @([changed] word)\n");
+    }
 }
 #endif  // VL_DEBUG
 
@@ -132,6 +140,9 @@ VL_ATTR_COLD void Vtop___024root___dump_triggers__nba(Vtop___024root* vlSelf) {
     if ((1ULL & vlSelf->__VnbaTriggered.word(0U))) {
         VL_DBG_MSGF("         'nba' region trigger index 0 is active: @(negedge clk)\n");
     }
+    if ((2ULL & vlSelf->__VnbaTriggered.word(0U))) {
+        VL_DBG_MSGF("         'nba' region trigger index 1 is active: @([changed] word)\n");
+    }
 }
 #endif  // VL_DEBUG
 
@@ -144,13 +155,21 @@ VL_ATTR_COLD void Vtop___024root___ctor_var_reset(Vtop___024root* vlSelf) {
     vlSelf->data = VL_RAND_RESET_I(1);
     vlSelf->s = VL_RAND_RESET_I(4);
     vlSelf->word = VL_RAND_RESET_I(8);
+    vlSelf->note = VL_RAND_RESET_I(3);
     vlSelf->top__DOT____Vtogcov__clk = VL_RAND_RESET_I(1);
     vlSelf->top__DOT____Vtogcov__data = VL_RAND_RESET_I(1);
     vlSelf->top__DOT____Vtogcov__s = VL_RAND_RESET_I(4);
     vlSelf->top__DOT____Vtogcov__word = VL_RAND_RESET_I(8);
+    vlSelf->top__DOT____Vtogcov__note = VL_RAND_RESET_I(3);
     vlSelf->top__DOT__kbd_infc__DOT__word_r = VL_RAND_RESET_I(8);
     vlSelf->top__DOT__kbd_infc__DOT__ns = VL_RAND_RESET_I(4);
     vlSelf->top__DOT__kbd_infc__DOT____Vtogcov__word_r = VL_RAND_RESET_I(8);
     vlSelf->top__DOT__kbd_infc__DOT____Vtogcov__ns = VL_RAND_RESET_I(4);
+    vlSelf->top__DOT__mono_out__DOT__note_r = VL_RAND_RESET_I(3);
+    vlSelf->top__DOT__mono_out__DOT__br = VL_RAND_RESET_I(1);
+    vlSelf->top__DOT__mono_out__DOT____Vtogcov__note_r = VL_RAND_RESET_I(3);
+    vlSelf->top__DOT__mono_out__DOT____Vtogcov__br = VL_RAND_RESET_I(1);
     vlSelf->__Vtrigprevexpr___TOP__clk__0 = VL_RAND_RESET_I(1);
+    vlSelf->__Vtrigprevexpr___TOP__word__0 = VL_RAND_RESET_I(8);
+    vlSelf->__VactDidInit = 0;
 }

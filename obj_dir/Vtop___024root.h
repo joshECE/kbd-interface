@@ -19,23 +19,31 @@ class alignas(VL_CACHE_LINE_BYTES) Vtop___024root final : public VerilatedModule
     VL_IN8(data,0,0);
     VL_OUT8(s,3,0);
     VL_OUT8(word,7,0);
+    VL_OUT8(note,2,0);
     CData/*0:0*/ top__DOT____Vtogcov__clk;
     CData/*0:0*/ top__DOT____Vtogcov__data;
     CData/*3:0*/ top__DOT____Vtogcov__s;
     CData/*7:0*/ top__DOT____Vtogcov__word;
+    CData/*2:0*/ top__DOT____Vtogcov__note;
     CData/*7:0*/ top__DOT__kbd_infc__DOT__word_r;
     CData/*3:0*/ top__DOT__kbd_infc__DOT__ns;
     CData/*7:0*/ top__DOT__kbd_infc__DOT____Vtogcov__word_r;
     CData/*3:0*/ top__DOT__kbd_infc__DOT____Vtogcov__ns;
+    CData/*2:0*/ top__DOT__mono_out__DOT__note_r;
+    CData/*0:0*/ top__DOT__mono_out__DOT__br;
+    CData/*2:0*/ top__DOT__mono_out__DOT____Vtogcov__note_r;
+    CData/*0:0*/ top__DOT__mono_out__DOT____Vtogcov__br;
     CData/*0:0*/ __Vtrigprevexpr___TOP__clk__0;
+    CData/*7:0*/ __Vtrigprevexpr___TOP__word__0;
+    CData/*0:0*/ __VactDidInit;
     CData/*0:0*/ __VactContinue;
     IData/*31:0*/ __VstlIterCount;
     IData/*31:0*/ __VicoIterCount;
     IData/*31:0*/ __VactIterCount;
     VlTriggerVec<1> __VstlTriggered;
     VlTriggerVec<1> __VicoTriggered;
-    VlTriggerVec<1> __VactTriggered;
-    VlTriggerVec<1> __VnbaTriggered;
+    VlTriggerVec<2> __VactTriggered;
+    VlTriggerVec<2> __VnbaTriggered;
 
     // INTERNAL VARIABLES
     Vtop__Syms* const vlSymsp;

@@ -17,25 +17,25 @@ initial begin
 	s = 4'd0;
 end
 
-assign ns = (s == 4'b1100) ? 4'b0001 : s + 4'b0001;
+assign ns = (s == 4'hB) ? 4'b0001 : s + 4'b0001;
 
 always@(negedge kbdclk) begin
 	s <= ns;
 	case (s) 
-		4'b0001:word_r[0] <= kbddata;	
+		4'h1:word_r[0] <= kbddata;	
 
-		4'b0010:word_r[1] <= kbddata;
+		4'h2:word_r[1] <= kbddata;
 
-		4'b0011:word_r[2] <= kbddata;
+		4'h3:word_r[2] <= kbddata;
 
-		4'b0100:word_r[3] <= kbddata;
+		4'h4:word_r[3] <= kbddata;
 		
-		4'b0101:word_r[4] <= kbddata;
+		4'h5:word_r[4] <= kbddata;
 		
-		4'b0110:word_r[5] <= kbddata;
-		4'b0111:word_r[6] <= kbddata;
-		4'b1000:word_r[7] <= kbddata;
-		4'b1001:word  <= word_r;
+		4'h6:word_r[5] <= kbddata;
+		4'h7:word_r[6] <= kbddata;
+		4'h8:word_r[7] <= kbddata;
+		4'h9:word  <= word_r;
 		default:;
 	endcase
 end

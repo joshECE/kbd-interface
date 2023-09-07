@@ -15,18 +15,26 @@ VL_ATTR_COLD void Vtop___024root__trace_init_sub__TOP__0(Vtop___024root* vlSelf,
     tracep->declBit(c+2,"data", false,-1);
     tracep->declBus(c+3,"s", false,-1, 3,0);
     tracep->declBus(c+4,"word", false,-1, 7,0);
+    tracep->declBus(c+5,"note", false,-1, 2,0);
     tracep->pushNamePrefix("top ");
     tracep->declBit(c+1,"clk", false,-1);
     tracep->declBit(c+2,"data", false,-1);
     tracep->declBus(c+3,"s", false,-1, 3,0);
     tracep->declBus(c+4,"word", false,-1, 7,0);
+    tracep->declBus(c+5,"note", false,-1, 2,0);
     tracep->pushNamePrefix("kbd_infc ");
     tracep->declBit(c+1,"kbdclk", false,-1);
     tracep->declBit(c+2,"kbddata", false,-1);
     tracep->declBus(c+3,"s", false,-1, 3,0);
     tracep->declBus(c+4,"word", false,-1, 7,0);
-    tracep->declBus(c+5,"word_r", false,-1, 7,0);
-    tracep->declBus(c+6,"ns", false,-1, 3,0);
+    tracep->declBus(c+6,"word_r", false,-1, 7,0);
+    tracep->declBus(c+7,"ns", false,-1, 3,0);
+    tracep->popNamePrefix(1);
+    tracep->pushNamePrefix("mono_out ");
+    tracep->declBus(c+4,"keycode", false,-1, 7,0);
+    tracep->declBus(c+5,"note", false,-1, 2,0);
+    tracep->declBus(c+8,"note_r", false,-1, 2,0);
+    tracep->declBit(c+9,"br", false,-1);
     tracep->popNamePrefix(2);
 }
 
@@ -74,6 +82,9 @@ VL_ATTR_COLD void Vtop___024root__trace_full_sub_0(Vtop___024root* vlSelf, Veril
     bufp->fullBit(oldp+2,(vlSelf->data));
     bufp->fullCData(oldp+3,(vlSelf->s),4);
     bufp->fullCData(oldp+4,(vlSelf->word),8);
-    bufp->fullCData(oldp+5,(vlSelf->top__DOT__kbd_infc__DOT__word_r),8);
-    bufp->fullCData(oldp+6,(vlSelf->top__DOT__kbd_infc__DOT__ns),4);
+    bufp->fullCData(oldp+5,(vlSelf->note),3);
+    bufp->fullCData(oldp+6,(vlSelf->top__DOT__kbd_infc__DOT__word_r),8);
+    bufp->fullCData(oldp+7,(vlSelf->top__DOT__kbd_infc__DOT__ns),4);
+    bufp->fullCData(oldp+8,(vlSelf->top__DOT__mono_out__DOT__note_r),3);
+    bufp->fullBit(oldp+9,(vlSelf->top__DOT__mono_out__DOT__br));
 }
